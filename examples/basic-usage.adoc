@@ -1,0 +1,56 @@
+= Basic Usage Examples
+:toc:
+
+This document demonstrates the basic usage of the Asciidoctor Rack Visualization Extension.
+
+== Simple Server Rack
+
+Here's a basic server rack with a few components:
+
+[rack-xml]
+----
+<racks>
+  <rack name="Basic Rack" height="10">
+    <server height="2">Web Server</server>
+    <switch>Network Switch</switch>
+    <server height="2">Database Server</server>
+  </rack>
+</racks>
+----
+
+== Text Markup Format
+
+The same rack using text markup:
+
+[rack-text]
+----
+caption: Basic Rack
+height: 10
+items:
+- server[2]: Web Server
+- switch: Network Switch
+- server[2]: Database Server
+----
+
+== Alternative Block Names
+
+You can use shorter block names:
+
+[rackml]
+----
+<racks>
+  <rack name="Dev Rack" height="6">
+    <server>Development Server</server>
+    <switch>Dev Switch</switch>
+  </rack>
+</racks>
+----
+
+[rack]
+----
+caption: Dev Rack
+height: 6
+items:
+- server: Development Server
+- switch: Dev Switch
+----

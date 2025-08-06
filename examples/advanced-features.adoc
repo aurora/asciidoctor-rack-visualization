@@ -1,0 +1,127 @@
+= Advanced Features Examples
+:toc:
+
+This document demonstrates advanced features of the Asciidoctor Rack Visualization Extension.
+
+== Clickable Links
+
+Components can have clickable links:
+
+[rack-xml]
+----
+<racks>
+  <rack name="Production Environment" height="20">
+    <server height="2" href="https://web1.prod.example.com">Web Server 1</server>
+    <server height="2" href="https://web2.prod.example.com">Web Server 2</server>
+    <switch href="https://switch.prod.example.com">Core Switch</switch>
+    <firewall href="https://firewall.prod.example.com">Production Firewall</firewall>
+    <server height="4" href="https://db.prod.example.com">Database Cluster</server>
+  </rack>
+</racks>
+----
+
+== Custom Colors
+
+You can specify custom colors for components:
+
+[rack-xml]
+----
+<racks>
+  <rack name="Colored Rack" height="15">
+    <server height="2" color="#ff6b6b">Critical Server</server>
+    <server height="2" color="#4ecdc4">Development Server</server>
+    <switch color="#45b7d1">Network Switch</switch>
+    <storage height="3" color="#96ceb4">Storage Array</storage>
+    <firewall color="#feca57">Security Firewall</firewall>
+  </rack>
+</racks>
+----
+
+== Positioning
+
+You can specify exact positions for components:
+
+[rack-xml]
+----
+<racks>
+  <rack name="Positioned Rack" height="42">
+    <server height="2" at="1">Top Server (Position 1-2)</server>
+    <switch at="10">Middle Switch (Position 10)</switch>
+    <storage height="4" at="20">Storage (Position 20-23)</storage>
+    <server height="2" at="40">Bottom Server (Position 40-41)</server>
+  </rack>
+</racks>
+----
+
+== Multiple Racks
+
+You can display multiple racks in one diagram:
+
+[rack-xml]
+----
+<racks id="datacenter-overview">
+  <rack name="Web Tier" height="20">
+    <server height="2">Web Server 1</server>
+    <server height="2">Web Server 2</server>
+    <server height="2">Web Server 3</server>
+    <switch>Load Balancer</switch>
+  </rack>
+  <rack name="Database Tier" height="20">
+    <server height="4">Primary Database</server>
+    <server height="4">Secondary Database</server>
+    <storage height="6">Database Storage</storage>
+  </rack>
+  <rack name="Infrastructure" height="20">
+    <firewall>Main Firewall</firewall>
+    <router>Core Router</router>
+    <switch>Management Switch</switch>
+    <ups height="3">UPS System</ups>
+    <pdu>Power Distribution</pdu>
+  </rack>
+</racks>
+----
+
+== All Component Types
+
+Demonstration of all supported component types:
+
+[rack-text]
+----
+caption: Complete Component Showcase
+height: 42
+items:
+- server[2]: Application Server
+- switch: Network Switch
+- firewall: Security Firewall
+- router: Core Router
+- storage[4]: Storage Array
+- pdu: Power Distribution Unit
+- ups[3]: UPS System
+- patch: Patch Panel
+- cables: Cable Management
+- tape[2]: Tape Drive
+- monitor: KVM Monitor
+- keyboard: KVM Keyboard
+- kvm: KVM Switch
+- blank[2]: Empty Space
+- server[2]: Database Server
+- switch: Backup Switch
+- blank[3]: Reserved Space
+----
+
+== Text Format with Links and Colors
+
+[rack-text]
+----
+caption: Advanced Text Format
+height: 25
+items:
+- server[2]: [Production Web Server](https://web.prod.example.com)
+- switch: [Core Switch](https://switch.example.com)
+- firewall: [Main Firewall](https://firewall.example.com)
+- server[4]: [Database Cluster](https://db.example.com)
+- storage[3]: Primary Storage
+- pdu: Power Distribution
+- ups[2]: Backup Power
+- blank[2]: Future Expansion
+----

@@ -1,0 +1,110 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Lint code
+      run: npm run lint
+    
+    - name: Build project
+      run: npm run build
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Install Asciidoctor for integration tests
+      run: npm install @asciidoctor/core
+    
+    - name: Run integration tests
+      run: npm run test:integration
+    
+    - name: Create distribution package
+      run: |
+        mkdir -p dist
+        cp -r lib/ dist/
+        cp package.json dist/
+        cp README.md dist/
+        cp LICENSE dist/
+        cp CHANGELOG.md dist/
+        cp USAGE.md dist/
+        cp -r examples/ dist/
+    
+    - name: Create tarball
+      run: |
+        cd dist
+        tar -czf ../asciidoctor-rack-visualization.tar.gz .
+        cd ..
+        zip -r asciidoctor-rack-visualization.zip dist/
+    
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          ## Installation from GitHub
+
+          ### Method 1: Direct Download
+          ```bash
+          # Download and extract
+          wget https://github.com/aurora/asciidoctor-rack-visualization/releases/download/${{ github.ref }}/asciidoctor-rack-visualization.tar.gz
+          tar -xzf asciidoctor-rack-visualization.tar.gz
+          ```
+
+          ### Method 2: Git Clone
+          ```bash
+          git clone https://github.com/aurora/asciidoctor-rack-visualization.git
+          cd asciidoctor-rack-visualization
+          npm install
+          npm run build
+          ```
+
+          ### Method 3: NPM from GitHub
+          ```bash
+          npm install https://github.com/aurora/asciidoctor-rack-visualization/releases/download/${{ github.ref }}/asciidoctor-rack-visualization.tar.gz
+          ```
+
+          See README.md for usage instructions.
+        draft: false
+        prerelease: false
+    
+    - name: Upload Release Asset (tar.gz)
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./asciidoctor-rack-visualization.tar.gz
+        asset_name: asciidoctor-rack-visualization.tar.gz
+        asset_content_type: application/gzip
+    
+    - name: Upload Release Asset (zip)
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./asciidoctor-rack-visualization.zip
+        asset_name: asciidoctor-rack-visualization.zip
+        asset_content_type: application/zip

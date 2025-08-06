@@ -1,0 +1,110 @@
+= Server Rack Visualization Examples
+:toc:
+
+== RackML XML Format
+
+Hier ist ein Beispiel für ein Server-Rack mit RackML XML:
+
+[rack-xml]
+----
+<racks>
+  <rack name="Production Rack 1" height="42">
+    <server height="2" href="https://web1.example.com">Web Server 1</server>
+    <server height="2" href="https://web2.example.com">Web Server 2</server>
+    <switch>Core Switch</switch>
+    <firewall>Main Firewall</firewall>
+    <server height="4" href="https://db.example.com">Database Server</server>
+    <storage height="3">Storage Array</storage>
+    <pdu>Power Distribution Unit</pdu>
+  </rack>
+</racks>
+----
+
+== Text Markup Format
+
+Das gleiche Rack mit Text-Markup:
+
+[rack-text]
+----
+caption: Production Rack 1
+height: 42
+items:
+- server[2]: [Web Server 1](https://web1.example.com)
+- server[2]: [Web Server 2](https://web2.example.com)
+- switch: Core Switch
+- firewall: Main Firewall
+- server[4]: [Database Server](https://db.example.com)
+- storage[3]: Storage Array
+- pdu: Power Distribution Unit
+----
+
+== Alternative Syntax
+
+Mit den kürzeren Block-Namen:
+
+[rackml]
+----
+<racks>
+  <rack name="Development Rack" height="20">
+    <server height="2">Dev Server 1</server>
+    <server height="2">Dev Server 2</server>
+    <switch>Dev Switch</switch>
+  </rack>
+</racks>
+----
+
+[rack]
+----
+caption: Development Rack
+height: 20
+items:
+- server[2]: Dev Server 1
+- server[2]: Dev Server 2
+- switch: Dev Switch
+----
+
+== Erweiterte Funktionen
+
+=== Benutzerdefinierte Farben
+
+[rack-xml]
+----
+<racks>
+  <rack name="Colored Rack" height="10">
+    <server color="#ff6b6b">Red Server</server>
+    <switch color="#4ecdc4">Teal Switch</switch>
+    <storage color="#45b7d1">Blue Storage</storage>
+  </rack>
+</racks>
+----
+
+=== Positionierung
+
+[rack-xml]
+----
+<racks>
+  <rack name="Positioned Rack" height="42">
+    <server height="2" at="1">Top Server</server>
+    <switch at="20">Middle Switch</switch>
+    <server height="2" at="40">Bottom Server</server>
+  </rack>
+</racks>
+----
+
+== Mehrere Racks
+
+[rack-xml]
+----
+<racks id="datacenter-overview">
+  <rack name="Rack A" height="42">
+    <server height="2">Web Server A1</server>
+    <server height="2">Web Server A2</server>
+    <switch>Switch A</switch>
+  </rack>
+  <rack name="Rack B" height="42">
+    <server height="4">Database Server B1</server>
+    <storage height="6">Storage Array B</storage>
+    <switch>Switch B</switch>
+  </rack>
+</racks>
+----

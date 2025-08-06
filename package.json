@@ -1,0 +1,106 @@
+{
+  "name": "asciidoctor-rack-visualization",
+  "version": "1.0.0",
+  "description": "Official Asciidoctor extension for rendering server rack diagrams from RackML XML or text markup",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./extension": {
+      "import": "./lib/extension.js",
+      "require": "./lib/extension.js",
+      "types": "./lib/extension.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "node test/test.js",
+    "test:integration": "node test/integration-test.js",
+    "prepare": "npm run build",
+    "prepack": "npm run build && npm test",
+    "clean": "rimraf lib",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "keywords": [
+    "asciidoctor",
+    "asciidoctor-extension",
+    "extension",
+    "rack",
+    "rack-visualization",
+    "visualization",
+    "diagram",
+    "server",
+    "datacenter",
+    "infrastructure",
+    "svg",
+    "rackml",
+    "markup",
+    "documentation",
+    "technical-writing"
+  ],
+  "author": {
+    "name": "Harald Lapp",
+    "email": "harald@example.com",
+    "url": "https://github.com/aurora"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/aurora/asciidoctor-rack-visualization#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aurora/asciidoctor-rack-visualization.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aurora/asciidoctor-rack-visualization/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "tar-stream": "^3.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "typescript": "^4.7.4",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "prettier": "^2.8.0",
+    "rimraf": "^3.0.2"
+  },
+  "peerDependencies": {
+    "@asciidoctor/core": "^2.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@asciidoctor/core": {
+      "optional": false
+    }
+  },
+  "files": [
+    "lib/**/*",
+    "src/**/*",
+    "README.md",
+    "USAGE.md",
+    "INSTALLATION.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "examples/**/*"
+  ],
+  "asciidoctor": {
+    "extension": true,
+    "blocks": ["rack-xml", "rack-text", "rackml", "rack"],
+    "version": "1.0.0"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/aurora"
+  }
+}
