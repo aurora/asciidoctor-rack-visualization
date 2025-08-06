@@ -3,6 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js CI](https://github.com/aurora/asciidoctor-rack-visualization/workflows/CI/badge.svg)](https://github.com/aurora/asciidoctor-rack-visualization/actions)
 [![GitHub release](https://img.shields.io/github/release/aurora/asciidoctor-rack-visualization.svg)](https://github.com/aurora/asciidoctor-rack-visualization/releases)
+![AI Generated](https://img.shields.io/badge/AI%20Generated-Yes-blue)
+
+> Model: Claude Sonnet-4 (2025-05-14) via Roo
 
 **Asciidoctor extension for rendering server rack diagrams from RackML XML or text markup.**
 
